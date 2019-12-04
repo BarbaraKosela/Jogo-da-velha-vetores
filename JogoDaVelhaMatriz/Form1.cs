@@ -43,9 +43,7 @@ namespace JogoDaVelhaMatriz
             else if (houveVencedorNaVertical == true)
                 MessageBox.Show("Vitória!");
             else if (houveVencedorNaDiagonal == true)
-                MessageBox.Show("Vitória");
-            else if (houveVencedorNaVertical == false)
-                MessageBox.Show("Nem todos os campos foram preenchidos");
+                MessageBox.Show("Vitória!"); 
             else
                 MessageBox.Show("Não houve vencedor");
 
@@ -99,8 +97,6 @@ namespace JogoDaVelhaMatriz
                         if (resultadoO == "OOO")
                             return true;
                     }
-                    else if(linhaVertical == "")
-                        return false;
                 }
                 resultadoX = "";
                 resultadoO = "";
@@ -134,11 +130,6 @@ namespace JogoDaVelhaMatriz
             textBox7.Clear();
             textBox8.Clear();
             textBox9.Clear();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -37,15 +37,18 @@ namespace JogoDaVelhaMatriz
             bool houveVencedorNaHorizontal = ProcurarHorizontal(campos);
             bool houveVencedorNaVertical = ProcurarVertical(campos);
             bool houveVencedorNaDiagonal = ProcurarDiagonal(campos);
+            bool verificarCampoVazio = VerificarCampoVazio(campos);
 
             if (houveVencedorNaHorizontal == true)
                 MessageBox.Show("Vitória!");
             else if (houveVencedorNaVertical == true)
                 MessageBox.Show("Vitória!");
             else if (houveVencedorNaDiagonal == true)
-                MessageBox.Show("Vitória!"); 
+                MessageBox.Show("Vitória!");
+            else if (verificarCampoVazio == true)
+                MessageBox.Show("Campos estão vazios, ou não foram preenchidos com 'o' ou 'x'.", "Atenção! Digite novamente!");
             else
-                MessageBox.Show("Não houve vencedor");
+                MessageBox.Show("Empate!");
 
         }
 
@@ -57,16 +60,16 @@ namespace JogoDaVelhaMatriz
             foreach (string campos in vetor)
             {
                 contador++;
-                if (campos == "X")
+                if (campos == "x")
                 {
                     resultadoX = campos + resultadoX;
-                    if (resultadoX == "XXX")
+                    if (resultadoX == "xxx")
                         return true;
                 }
-                else if (campos == "O")
+                else if (campos == "o")
                 {
                     resultadoO = campos + resultadoO;
-                    if (resultadoO == "OOO")
+                    if (resultadoO == "ooo")
                         return true;
                 }
                 if (contador == 3)
@@ -87,18 +90,20 @@ namespace JogoDaVelhaMatriz
                 for (int outroVert = 0; outroVert < 3; outroVert++)
                 {
                     var linhaVertical = vetor[outroVert, vert];
-                    if (linhaVertical == "X")
+                    if (linhaVertical == "x")
                     {
                         resultadoX = linhaVertical + resultadoX;
-                        if (resultadoX == "XXX")
+                        if (resultadoX == "xxx")
                             return true;
                     }
-                    else if (linhaVertical == "O")
+                    else if (linhaVertical == "o")
                     {
                         resultadoO = linhaVertical + resultadoO;
-                        if (resultadoO == "OOO")
+                        if (resultadoO == "ooo")
                             return true;
                     }
+                    else if (linhaVertical == "")
+                        return false;
                 }
                 resultadoX = "";
                 resultadoO = "";
@@ -110,16 +115,29 @@ namespace JogoDaVelhaMatriz
             bool haVencedorDiagonal = false;
             while (!haVencedorDiagonal)
             {
-                if (vetor[0, 0] == "X" && vetor[1, 1] == "X" && vetor[2, 2] == "X" ||
-                    vetor[0, 0] == "O" && vetor[1, 1] == "O" && vetor[2, 2] == "O")
+                if(vetor[0, 0] == vetor[1, 1] && vetor[1, 1] == vetor[2, 2])
                     haVencedorDiagonal = true;
-                else if (vetor[0, 2] == "X" && vetor[1, 1] == "X" && vetor[2, 0] == "X" ||
-                    vetor[0, 2] == "O" && vetor[1, 1] == "O" && vetor[2, 0] == "O")
+                else if (vetor[0, 2] == vetor[1, 1] && vetor[1, 1] == vetor[2, 0])
                     haVencedorDiagonal = true;
                 else
                     return false;
             }
             return haVencedorDiagonal;
+        }
+
+        static bool VerificarCampoVazio(string[,] vetor)
+        {
+            for (int linha = 0; linha < 3; linha++)
+            {
+                for (int outraLinha = 0; outraLinha < 3; outraLinha++)
+                {
+                    var linhas = vetor[outraLinha, linha];
+                    if (linhas == string.Empty)
+                        return true;
+                }
+
+            }
+            return false;
         }
         private void button1_Click(object sender, EventArgs e)
         {

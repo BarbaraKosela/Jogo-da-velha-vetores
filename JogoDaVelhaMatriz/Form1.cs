@@ -53,26 +53,28 @@ namespace JogoDaVelhaMatriz
         {
             string resultadoX = "";
             string resultadoO = "";
-            for (int horiz = 0; horiz < 3; horiz++)
+            int contador = 0;
+            foreach (string campos in vetor)
             {
-                for (int outroHoriz = 0; outroHoriz < 3; outroHoriz++)
+                contador++;
+                if (campos == "X")
                 {
-                    var linhaHorizontal = vetor[horiz, outroHoriz];
-                    if (linhaHorizontal == "X")
-                    {
-                        resultadoX = linhaHorizontal + resultadoX;
-                        if (resultadoX == "XXX")
-                            return true;
-                    }
-                    else if (linhaHorizontal == "O")
-                    {
-                        resultadoO = linhaHorizontal + resultadoO;
-                        if (resultadoO == "OOO")
-                            return true;
-                    }
+                    resultadoX = campos + resultadoX;
+                    if (resultadoX == "XXX")
+                        return true;
                 }
-                resultadoX = "";
-                resultadoO = "";
+                else if (campos == "O")
+                {
+                    resultadoO = campos + resultadoO;
+                    if (resultadoO == "OOO")
+                        return true;
+                }
+                if (contador == 3)
+                {
+                    resultadoX = "";
+                    resultadoO = "";
+                    contador = 0;
+                }
             }
             return false;
         }

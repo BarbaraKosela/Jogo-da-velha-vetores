@@ -17,7 +17,7 @@ namespace JogoDaVelhaMatriz
             InitializeComponent();
         }
 
-        private void Form1_MouseClick(object sender, MouseEventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
             string[,] campos;
             campos = new string[3, 3];
@@ -49,9 +49,7 @@ namespace JogoDaVelhaMatriz
                 MessageBox.Show("Campos estão vazios, ou não foram preenchidos com 'o' ou 'x'.", "Atenção! Digite novamente!");
             else
                 MessageBox.Show("Empate!");
-
         }
-
         static bool ProcurarHorizontal(string[,] vetor)
         {
             string resultadoX = "";
@@ -102,8 +100,6 @@ namespace JogoDaVelhaMatriz
                         if (resultadoO == "ooo")
                             return true;
                     }
-                    else if (linhaVertical == "")
-                        return false;
                 }
                 resultadoX = "";
                 resultadoO = "";
@@ -115,10 +111,18 @@ namespace JogoDaVelhaMatriz
             bool haVencedorDiagonal = false;
             while (!haVencedorDiagonal)
             {
-                if(vetor[0, 0] == vetor[1, 1] && vetor[1, 1] == vetor[2, 2])
+                if (vetor[0, 0] == vetor[1, 1] && vetor[1, 1] == vetor[2, 2])
+                {
+                    if (vetor[0, 0] == string.Empty && vetor[2, 2] == string.Empty)
+                        return false;
                     haVencedorDiagonal = true;
+                }
                 else if (vetor[0, 2] == vetor[1, 1] && vetor[1, 1] == vetor[2, 0])
+                {
+                    if (vetor[0, 2] == string.Empty && vetor[2, 0] == string.Empty)
+                        return false;
                     haVencedorDiagonal = true;
+                }
                 else
                     return false;
             }
@@ -151,5 +155,6 @@ namespace JogoDaVelhaMatriz
             textBox8.Clear();
             textBox9.Clear();
         }
+
     }
 }
